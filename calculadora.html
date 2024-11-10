@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script src="calculadora.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="calculadora.css">
+</head>
+<body>
+    <div id="container" class="flex justify-center items-center">
+
+        <div id="calculadora" class="bg-yellow-500 p-10 border-yellow-900 border-8 rounded-3xl">
+
+            <form id="form">
+                <div class="border-8 border-yellow-900 rounded-3xl">
+                    <input type="text" class="w-full h-16 bg-gray-100 shadow-inner border-y-8 border-gray-300 rounded-xl focus:ring-gray-300 focus:border-gray-300 text-right text-lg font-medium px-2" id="numbersScreen" name="numbersScreen">
+                </div>
+        
+                <div class="grid grid-cols-4 grid-rows-5 gap-1 py-2">
+                        <button type="button" class="fucsia" id="clearHistory">CH</button>
+                        <button type="button" class="fucsia" id="historial">H</button>
+                        <button type="button" class="fucsia" id="clear">C</button>
+                        <button type="button" class="fucsia pl-3.5" id="del">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3 " stroke="currentColor" class="size-6 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" />
+                            </svg>                          
+                        </button>
+                        <button type="button" class="fucsia" onclick="activarOperador('%')">%</button>
+                        <button type="button" class="fucsia" onclick="activarOperador('^')">xª</button>
+                        <button type="button" class="fucsia" onclick="activarOperador('√')">√x</button>
+                        <button type="button" class="rosa" onclick="activarOperador('/')">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-6 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.499 11.998h15m-7.5-6.75h.008v.008h-.008v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM12 18.751h.007v.007H12v-.007Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>                   
+                        </button>
+                        <input type="button" class="numero" value="7" readonly>
+                        <input type="button" class="numero" value="8" readonly>
+                        <input type="button" class="numero" value="9" readonly>
+                        <button type="button" class="rosa" onclick="activarOperador('*')">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-6 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <input type="button" class="numero" value="4" readonly>
+                        <input type="button" class="numero" value="5" readonly>
+                        <input type="button" class="numero" value="6" readonly>
+                        <button type="button" class="rosa" id="suma" onclick="activarOperador('+')">
+                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14m-7 7V5"/>
+                            </svg>                          
+                        </button>
+                        <input type="button" class="numero" value="1" readonly>
+                        <input type="button" class="numero" value="2" readonly>
+                        <input type="button" class="numero" value="3" readonly>
+                        <button type="button" class="rosa" onclick="activarOperador('-')">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-6 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                            </svg>                        
+                        </button>
+                        <button type="button" class="bg-sky-600 py-1 px-3 border-8 border-sky-800 hover:border-sky-500 hover:bg-sky-700 rounded-full text-white text-xl font-bold" onclick="cambiaSigno()">+/-</button>                        
+                        <input type="button" class="numero" value="0" readonly>
+                        <button type="button" class="bg-sky-600 px-3 border-8 border-sky-800 hover:border-sky-500 hover:bg-sky-700 rounded-full text-white text-xl font-bold" onclick="activarOperador(',')">,</button>
+                        <button type="submit" class="rosa">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-6 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.499 8.248h15m-15 7.501h15" />
+                            </svg>                       
+                        </button>
+                </div>
+            </form>
+
+        </div>
+        
+    </div>    
+
+</body>
+</html>

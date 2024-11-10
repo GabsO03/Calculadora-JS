@@ -1,0 +1,109 @@
+#container {
+    margin: 0;
+    height: 100vh;
+}
+
+.fucsia {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    font-weight: 700;
+    
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+
+    /*padding-left: 0.75rem;
+    padding-right: 0.75rem;*/
+
+    --tw-bg-opacity: 1;
+    background-color: rgb(190 24 93 / var(--tw-bg-opacity));
+
+    --tw-border-opacity: 1;
+    border-color: rgb(110, 34, 78);
+
+    border-width: 8px;
+
+    border-radius: 9999px;
+
+
+}
+
+.rosa {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    --tw-bg-opacity: 1;
+    background-color: rgb(236 72 153 / var(--tw-bg-opacity));
+
+    --tw-border-opacity: 1;
+    border-color: rgb(190 24 93 / var(--tw-border-opacity));
+
+    border-width: 8px;
+
+    border-radius: 9999px;
+
+
+}
+
+.numero {
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+
+    text-align: center;
+
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 168 212 / var(--tw-bg-opacity));
+
+    --tw-border-opacity: 1;
+    border-color: rgb(236 72 153 / var(--tw-border-opacity));
+
+    border-width: 8px;
+
+    border-radius: 9999px;
+
+        /* Agregamos estilos para el scroll */
+        display: inline-block;
+        max-width: 100px; /* Ajusta este ancho según sea necesario */
+        overflow-x: auto; /* Permite el scroll horizontal */
+        white-space: nowrap; /* Mantiene el texto en una línea */
+}
+
+.fucsia:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(189, 42, 104);
+
+    --tw-border-opacity: 1;
+    border-color: rgb(84, 35, 63);
+}
+
+.rosa:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(234, 93, 163);
+
+    --tw-border-opacity: 1;
+    border-color: rgb(157, 36, 87);
+}
+
+.numero:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(231, 187, 211);
+
+    --tw-border-opacity: 1;
+    border-color: rgb(180, 39, 110);
+}
+
+@media (max-width: 646px) { /* Pantallas móviles (sm) */
+    .rosa {
+        padding-left: 0.8rem; /* Reduce el padding izquierdo en pantallas móviles */
+    }
+}
