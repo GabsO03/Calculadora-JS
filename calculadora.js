@@ -1,6 +1,7 @@
 let inputContenido = '';
 let operacionPendiente = '';
 let historial = 'Historial:\n';
+let decimalesDisponibles = 2;
 
 //Para verificar doble
 const esNumeroUOperador = /^\s*(-?\d+([.,]\d+)?(\s*[+\-*/%]\s*-?\d+([.,]\d+)?)*)|([+\-*/%])\s*$/;
@@ -72,6 +73,9 @@ window.addEventListener('load', () => {
             let lastChar = inputContenido.value.charAt(inputContenido.value.length-1);
             if(!esOperador.test(lastChar) && operacionPendiente.length === 1) operacionPendiente = '';
         }
+        else if(typeof(input.data) === 'string') {
+            inputContenido.value = inputContenido.value.substring(1, inputContenido.value.length);
+        }
     })
 
     //Mostrar historial
@@ -135,13 +139,23 @@ function cambiaSigno () {
 
 
 function activarOperador (operador, entraPorTeclado = false) {
-    if([',', '.'].includes(operador)) {
-        inputContenido.value += '.';
+    let ultimoChar = inputContenido.value.charAt(inputContenido.value.length-(entraPorTeclado?2:1));
+    if(operador === '.') {
+        if(decimalesDisponibles > 0) {
+            if(esNumero.test(ultimoChar) && decimalesDisponibles===2) {
+                inputContenido.value += '.';
+                decimalesDisponibles--;
+            }
+            else if(operacionPendiente) {
+                inputContenido.value += '.';
+                decimalesDisponibles--;
+            }
+        }
     }
     else {
 
         //Verificamos que no se repite un signo dos veces seguidas
-        let tieneUnNumeroAntes = esNumero.test(inputContenido.value.charAt(inputContenido.value.length-(entraPorTeclado?2:1)));
+        let tieneUnNumeroAntes = esNumero.test(ultimoChar);
 
         
         if(tieneUnNumeroAntes) {
@@ -155,14 +169,14 @@ function activarOperador (operador, entraPorTeclado = false) {
             
             //Si tiene un número y ya hay una operación pendiente, hacemos la operación
             if(operacionPendiente.length === 1) {
-                if(operador === '√') mostrarResultado(true);
-                else mostrarResultado();
+                mostrarResultado(operador === '√');
+                if(operador !== '√') inputContenido.value += operador;
                 operacionPendiente = operador;
             }
             //Si es una nueva
             else {
                 if(operador === '√') {
-                    inputContenido.value = operador +inputContenido.value;
+                    inputContenido.value = operador + inputContenido.value;
                 }
                 else {
                     if(!entraPorTeclado) inputContenido.value += operador;
@@ -176,11 +190,32 @@ function activarOperador (operador, entraPorTeclado = false) {
                 operacionPendiente = '√';
             }
 
-            if(operador === '-' && entraPorTeclado) {
-                inputContenido.value += operador;
-            }
             let auxIndexOperator = inputContenido.value.indexOf(operador);
-            inputContenido.value = inputContenido.value.substring(0, auxIndexOperator+1)
+            if(entraPorTeclado) {
+                if(operador === '-') {
+                    inputContenido.value += operador;
+                }
+                else {
+                    inputContenido.value = inputContenido.value.substring(0, auxIndexOperator)
+                }
+            }
+            else {
+                if(operador === '-' && !['.', '-'].includes(ultimoChar)) {
+                    inputContenido.value += operador;
+                }
+                else if(ultimoChar === '.') {
+                    //Borramos el punto si no hay nada después de este
+                    inputContenido.value = inputContenido.value.substring(0, inputContenido.value.indexOf(ultimoChar));
+
+                    inputContenido.value += operador;
+                    decimalesDisponibles++;
+                    operacionPendiente = operador;
+
+                }
+                else {
+                    inputContenido.value = inputContenido.value.substring(0, auxIndexOperator+1)
+                }
+            }
         }
     }
     if(inputContenido.value.endsWith('Sin definir' + operador)) {
@@ -210,12 +245,12 @@ function calcularResultado() {
     else {
         let operacion = inputContenido.value.split(operacionPendiente);
         let num1 = parseFloat(operacion[0]);
-        console.log('num1: '+num1);
         let num2 = parseFloat(operacion[1]);
-        console.log('num2: '+num2);
         resultado = operaciones(num1, num2, operacionPendiente);
     }
 
+    if(resultado !== Math.floor(resultado)) decimalesDisponibles = 1;
+    else decimalesDisponibles = 2;
     return resultado;
 }
 
@@ -259,7 +294,6 @@ function operaciones(num1, num2=0, tipoOperacion) {
             else {
                 let cociente = 0;
                 let hayUnNegativo = false;
-                console.log(num1 + ' ' + num2);
 
                 //Hacemos lo mismo que en la multiplicación
                 if(num1<0 && num2 <0) {
